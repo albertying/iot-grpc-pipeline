@@ -24,25 +24,25 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0c\x64\x65vice.proto\"\xad\x01\n\x04\x44\x61ta\x12\x11\n\tdevice_id\x18\x01 \x01(\x05\x12 \n\x0b\x64\x65vice_type\x18\x02 \x01(\x0e\x32\x0b.DeviceType\x12\'\n\x0btemperature\x18\x03 \x01(\x0b\x32\x10.TemperatureDataH\x00\x12\x1d\n\x07wattage\x18\x04 \x01(\x0b\x32\n.PowerDataH\x00\x12\x1d\n\x06motion\x18\x05 \x01(\x0b\x32\x0b.MotionDataH\x00\x42\t\n\x07payload\"&\n\x0fTemperatureData\x12\x13\n\x0btemperature\x18\x01 \x01(\x02\"\x1c\n\tPowerData\x12\x0f\n\x07wattage\x18\x01 \x01(\x02\"\x1c\n\nMotionData\x12\x0e\n\x06motion\x18\x01 \x01(\x08\"\x1a\n\x08Response\x12\x0e\n\x06status\x18\x01 \x01(\t*M\n\nDeviceType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0bTHERMOMETER\x10\x01\x12\x0e\n\nSMART_PLUG\x10\x02\x12\x11\n\rMOTION_SENSOR\x10\x03\x32\x37\n\rDeviceService\x12&\n\x10StreamDeviceData\x12\x05.Data\x1a\t.Response(\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0c\x64\x65vice.proto\"\xc0\x01\n\x04\x44\x61ta\x12\x11\n\tdevice_id\x18\x01 \x01(\x05\x12 \n\x0b\x64\x65vice_type\x18\x02 \x01(\x0e\x32\x0b.DeviceType\x12\x11\n\ttimestamp\x18\x03 \x01(\t\x12\'\n\x0btemperature\x18\x04 \x01(\x0b\x32\x10.TemperatureDataH\x00\x12\x1d\n\x07wattage\x18\x05 \x01(\x0b\x32\n.PowerDataH\x00\x12\x1d\n\x06motion\x18\x06 \x01(\x0b\x32\x0b.MotionDataH\x00\x42\t\n\x07payload\"&\n\x0fTemperatureData\x12\x13\n\x0btemperature\x18\x01 \x01(\x02\"\x1c\n\tPowerData\x12\x0f\n\x07wattage\x18\x01 \x01(\x02\"\x1c\n\nMotionData\x12\x0e\n\x06motion\x18\x01 \x01(\x08\"\x1a\n\x08Response\x12\x0e\n\x06status\x18\x01 \x01(\t*M\n\nDeviceType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0bTHERMOMETER\x10\x01\x12\x0e\n\nSMART_PLUG\x10\x02\x12\x11\n\rMOTION_SENSOR\x10\x03\x32\x37\n\rDeviceService\x12&\n\x10StreamDeviceData\x12\x05.Data\x1a\t.Response(\x01\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'device_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_DEVICETYPE']._serialized_start=320
-  _globals['_DEVICETYPE']._serialized_end=397
+  _globals['_DEVICETYPE']._serialized_start=339
+  _globals['_DEVICETYPE']._serialized_end=416
   _globals['_DATA']._serialized_start=17
-  _globals['_DATA']._serialized_end=190
-  _globals['_TEMPERATUREDATA']._serialized_start=192
-  _globals['_TEMPERATUREDATA']._serialized_end=230
-  _globals['_POWERDATA']._serialized_start=232
-  _globals['_POWERDATA']._serialized_end=260
-  _globals['_MOTIONDATA']._serialized_start=262
-  _globals['_MOTIONDATA']._serialized_end=290
-  _globals['_RESPONSE']._serialized_start=292
-  _globals['_RESPONSE']._serialized_end=318
-  _globals['_DEVICESERVICE']._serialized_start=399
-  _globals['_DEVICESERVICE']._serialized_end=454
+  _globals['_DATA']._serialized_end=209
+  _globals['_TEMPERATUREDATA']._serialized_start=211
+  _globals['_TEMPERATUREDATA']._serialized_end=249
+  _globals['_POWERDATA']._serialized_start=251
+  _globals['_POWERDATA']._serialized_end=279
+  _globals['_MOTIONDATA']._serialized_start=281
+  _globals['_MOTIONDATA']._serialized_end=309
+  _globals['_RESPONSE']._serialized_start=311
+  _globals['_RESPONSE']._serialized_end=337
+  _globals['_DEVICESERVICE']._serialized_start=418
+  _globals['_DEVICESERVICE']._serialized_end=473
 # @@protoc_insertion_point(module_scope)

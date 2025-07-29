@@ -14,10 +14,11 @@ enum DeviceType {
 message Data {
     int32 device_id = 1;
     DeviceType device_type = 2;
+    string timestamp = 3;
     oneof payload {
-        TemperatureData temperature = 3;
-        PowerData wattage = 4;
-        MotionData motion = 5;
+        TemperatureData temperature = 4;
+        PowerData wattage = 5;
+        MotionData motion = 6;
     }
 }
 
