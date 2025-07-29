@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+service DeviceService {
+    rpc StreamDeviceData(stream Data) returns (Response);
+}
+
+message Data {
+    int32 device_id = 1;
+    string device_type = 2;
+    string payload = 3;
+}
+
+message Response {
+    string status = 1;
+}
