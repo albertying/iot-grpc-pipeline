@@ -7,7 +7,23 @@ service DeviceService {
 message Data {
     int32 device_id = 1;
     string device_type = 2;
-    string payload = 3;
+    oneof payload {
+        TemperatureData temperature = 3;
+        PowerData wattage = 4;
+        MotionData motion = 5;
+    }
+}
+
+message TemperatureData {
+    float temperature = 1;
+}
+
+message PowerData {
+    float wattage = 1;
+}
+
+message MotionData {
+    bool motion = 1;
 }
 
 message Response {
