@@ -4,9 +4,17 @@ service DeviceService {
     rpc StreamDeviceData(stream Data) returns (Response);
 }
 
+enum DeviceType {
+    UNKNOWN = 0;
+    THERMOMETER = 1;
+    SMART_PLUG = 2;
+    MOTION_SENSOR = 3;
+}
+
+
 message Data {
     int32 device_id = 1;
-    string device_type = 2;
+    DeviceType device_type = 2;
     oneof payload {
         TemperatureData temperature = 3;
         PowerData wattage = 4;
