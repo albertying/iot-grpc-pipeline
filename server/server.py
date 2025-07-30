@@ -6,11 +6,13 @@ import asyncio
 
 class DeviceService(device_pb2_grpc.DeviceServiceServicer):
     async def StreamDeviceData(self, request_iterator, context):
-        count = 0
 
         async for data in request_iterator:
-            count += 1
-            print(f"received: {data.device_type}, {data.device.payload}")
+            payload_type = data.WhichOneof("payload")
+            payload_value = getattr(data, payload_type)
+
+            print(f"received device_id={data.device_id}, type={data.device_type}, timestamp={data.timestamp}, payload_type={payload_type}, payload_value={payload_value}")
+
 
         return device_pb2.Response(status = "Success")
 async def serve():
