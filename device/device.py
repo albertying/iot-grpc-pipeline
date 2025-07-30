@@ -1,8 +1,7 @@
 import datetime
 import grpc
-import device_pb2
-import device_pb2_grpc
-
+from gen import device_pb2
+from gen import device_pb2_grpc
 import asyncio
 import random
 
