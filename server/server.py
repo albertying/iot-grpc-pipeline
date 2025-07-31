@@ -4,6 +4,45 @@ from gen import device_pb2_grpc
 
 import asyncio
 
+from abc import ABC, abstractmethod
+
+# strategy interface
+class DeviceStrategy(ABC):
+    @abstractmethod
+    def should_send(self, data: any) -> bool:
+        pass
+
+class ThermometerStrategy(DeviceStrategy):
+    def init__(self, threshold):
+        self.threshold = threshold
+    
+    def should_send(self, data: any) -> bool:
+        if data > self.threshold:
+            return True
+        else:
+            return False
+        
+class MotionSensorStrategy(DeviceStrategy):
+    def __init__(self, state):
+        self.state = state
+    
+    def should_send(self, data: any) -> bool:
+        if data == self.state:
+            return data
+        else:
+            return not data
+
+class SmartPlugStrategy(DeviceStrategy):
+    def __init__(self, threshold):
+        self.threshold = threshold
+    
+    def should_send(self, data: any) -> bool:
+        if data > self.threshold:
+            return True
+        else:
+            return False
+
+
 class DeviceService(device_pb2_grpc.DeviceServiceServicer):
     async def StreamDeviceData(self, request_iterator, context):
 
