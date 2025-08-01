@@ -46,6 +46,10 @@ class SmartPlugStrategy(DeviceStrategy):
 class DeviceService(device_pb2_grpc.DeviceServiceServicer):
     async def StreamDeviceData(self, request_iterator, context):
 
+        thermometer_strategy = ThermometerStrategy(100)
+        motion_sensor_strategy = MotionSensorStrategy(True)
+        smart_plug_strategy = SmartPlugStrategy(450)
+
         async for data in request_iterator:
             payload_type = data.WhichOneof("payload")
             payload_value = getattr(data, payload_type)
@@ -54,6 +58,7 @@ class DeviceService(device_pb2_grpc.DeviceServiceServicer):
 
 
         return device_pb2.Response(status = "Success")
+    
 async def serve():
     server = grpc.aio.server()
     device_pb2_grpc.add_DeviceServiceServicer_to_server(DeviceService(), server)
