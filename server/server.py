@@ -13,7 +13,7 @@ class DeviceStrategy(ABC):
         pass
 
 class ThermometerStrategy(DeviceStrategy):
-    def init__(self, threshold):
+    def __init__(self, threshold):
         self.threshold = threshold
     
     def should_send(self, data: any) -> bool:
