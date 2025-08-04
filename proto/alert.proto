@@ -3,3 +3,40 @@ syntax = "proto3";
 service AlertService {
     rpc StreamAlerts(stream AlertRequest) returns (stream AlertResponse);
 }
+
+message AlertRequest {
+    oneof request_type {
+        SubscribeRequest subscribe = 1;
+        UnsubscribeRequest unsubscribe = 2;
+    }
+}
+
+message SubscribeRequest {
+    string client_id = 1;
+    string device_id = 2;
+    repeated string alert_types = 3;
+}
+
+message UnsubscribeRequest {
+    string client_id = 1;
+    string device_id = 2;
+    repeated string alert_types = 3;
+}
+
+message AlertResponse {
+    oneof response_type {
+        AckResponse ack = 1;
+        AlertNotification alert = 2;
+    }
+}
+
+message AckResponse {
+    string message = 1;
+    bool success = 2;
+}
+
+message AlertNotification {
+    string device_id = 1;
+    string message = 2;
+    string timestamp = 3;
+}
