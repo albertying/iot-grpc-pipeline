@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+service AlertService {
+    rpc StreamAlerts(stream AlertRequest) returns (stream AlertResponse);
+}
