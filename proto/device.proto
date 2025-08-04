@@ -4,10 +4,6 @@ service DeviceService {
     rpc StreamDeviceData(stream Data) returns (Response);
 }
 
-service ControlService {
-    rpc ControlStream (stream ControlMessage) returns (stream ControlMessage);
-}
-
 enum DeviceType {
     UNKNOWN = 0;
     THERMOMETER = 1;
