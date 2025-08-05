@@ -37,7 +37,12 @@ async def send_requests(stream):
             continue
         await stream.write(request)
 
-
+async def receive_responses(stream):
+    async for response in stream:
+        if response.HasField("ack"):
+            print(f"[ACK] {response.ack.message} | Success: {response.ack.success}")
+        elif response.HasField("alert"):
+            print(f"[ALERT] {response.alert.device_id}: {response.alert.message} at {response.alert.timestamp}")
 
 async def run():
     async with grpc.aio.insecure_channel('localhost:50051') as channel:
