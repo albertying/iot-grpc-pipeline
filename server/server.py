@@ -2,6 +2,11 @@ import grpc
 from gen import device_pb2
 from gen import device_pb2_grpc
 
+from gen import alert_pb2
+from gen import alert_pb2_grpc
+
+import collections
+
 import asyncio
 
 from abc import ABC, abstractmethod
@@ -41,6 +46,18 @@ class SmartPlugStrategy(DeviceStrategy):
             return True
         else:
             return False
+    
+class AlertService(alert_pb2_grpc.AlertServiceServicer):
+    async def StreamAlerts(self, request_iterator, context):
+        mapping = collections.defaultdict(list)
+        async for request in request_iterator:
+            if request.HasField("subscribe"):
+                mapping[request.subscribe.client_id].append(request.subscribe.device_id)
+            elif request.HasField("unsubscribe"):
+                mapping[request.unsubscribe.client_id].remove(request.unsubscribe.device_id)
+        
+            
+            
 
 
 class DeviceService(device_pb2_grpc.DeviceServiceServicer):
@@ -62,6 +79,7 @@ class DeviceService(device_pb2_grpc.DeviceServiceServicer):
 async def serve():
     server = grpc.aio.server()
     device_pb2_grpc.add_DeviceServiceServicer_to_server(DeviceService(), server)
+    alert_pb2_grpc.add_AlertServiceServicer_to_server()
     server.add_insecure_port('[::]:50051')
     await server.start()
     print("Server started on port 50051")
