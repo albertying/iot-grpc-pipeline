@@ -49,6 +49,11 @@ async def run():
         stub = alert_pb2_grpc.AlertServiceStub(channel)
 
         stream = stub.StreamAlerts()
+
+        send_task = asyncio.create_task(send_requests(stream))
+        receive_task = asyncio.create_task(receive_responses(stream))
+
+        await asyncio.gather(send_task, receive_task)
         
 
 if __name__ == '__main__':
