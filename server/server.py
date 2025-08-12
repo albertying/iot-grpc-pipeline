@@ -109,8 +109,9 @@ class DeviceService(device_pb2_grpc.DeviceServiceServicer):
     
 async def serve():
     server = grpc.aio.server()
-    device_pb2_grpc.add_DeviceServiceServicer_to_server(DeviceService(), server)
-    alert_pb2_grpc.add_AlertServiceServicer_to_server(AlertService(), server)
+    alert_manager = AlertManager()
+    device_pb2_grpc.add_DeviceServiceServicer_to_server(DeviceService(alert_manager), server)
+    alert_pb2_grpc.add_AlertServiceServicer_to_server(AlertService(alert_manager), server)
     server.add_insecure_port('[::]:50051')
     await server.start()
     print("Server started on port 50051")
