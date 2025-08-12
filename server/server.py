@@ -46,6 +46,7 @@ class SmartPlugStrategy(DeviceStrategy):
             return True
         else:
             return False
+        
 
 
 class AlertManager:
@@ -91,6 +92,14 @@ class DeviceService(device_pb2_grpc.DeviceServiceServicer):
             "motion": MotionSensorStrategy(True),
             "plug": SmartPlugStrategy(450)
         }
+
+    async def send_alert_to_subscribers(self, device_id, message, timestamp):
+        for client_id, subscribed_devices in self.alert_manager.subscriptions.items():
+            if device_id in subscribed_devices:
+                context = self.alert_manager.client.get(client_id)
+                if context is not None:
+                    alert_response = alert_pb2.AlertResponse(alert = alert_pb2.Alert(device_id = device_id, message = message, timestamp = timestamp))
+                    await context.write(alert_response)
         
     async def StreamDeviceData(self, request_iterator, context):
 
