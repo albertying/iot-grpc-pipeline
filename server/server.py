@@ -109,7 +109,7 @@ class DeviceService(device_pb2_grpc.DeviceServiceServicer):
 
             print(f"received device_id={data.device_id}, type={data.device_type}, timestamp={data.timestamp}, payload_type={payload_type}, payload_value={payload_value}")
 
-            strategy = self.device_strategies.get(data.device_id)
+            strategy = self.device_strategies.get(data.device_type)
             if strategy and strategy.should_send(payload_value):
                 await self.send_alert_to_subscribers(data.device_id, f"Alert! Value = {payload_value}", data.timestamp)
 
