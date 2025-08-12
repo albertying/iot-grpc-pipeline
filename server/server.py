@@ -71,8 +71,8 @@ class AlertService(alert_pb2_grpc.AlertServiceServicer):
                     )
                 )
             elif request.HasField("unsubscribe"):
-                client_id = request.subscribe.client_id
-                device_id = request.subscribe.device_id
+                client_id = request.unsubscribe.client_id
+                device_id = request.unsubscribe.device_id
                 self.alert_manager.subscriptions[client_id].discard(device_id)
 
                 yield alert_pb2.AlertResponse(
