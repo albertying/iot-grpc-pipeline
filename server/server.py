@@ -33,9 +33,9 @@ class MotionSensorStrategy(DeviceStrategy):
     
     def should_send(self, data: any) -> bool:
         if data == self.state:
-            return data
+            return data == self.state
         else:
-            return not data
+            return not data == self.state
 
 class SmartPlugStrategy(DeviceStrategy):
     def __init__(self, threshold):
