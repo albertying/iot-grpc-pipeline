@@ -88,9 +88,9 @@ class DeviceService(device_pb2_grpc.DeviceServiceServicer):
     def __init__(self, alert_manager: AlertManager):
         self.alert_manager = alert_manager
         self.device_strategies = {
-            "thermo": ThermometerStrategy(100),
-            "motion": MotionSensorStrategy(True),
-            "plug": SmartPlugStrategy(450)
+            device_pb2.THERMOMETER: ThermometerStrategy(100),
+            device_pb2.SMART_PLUG: SmartPlugStrategy(450),
+            device_pb2.MOTION_SENSOR: MotionSensorStrategy(True)
         }
 
     async def send_alert_to_subscribers(self, device_id, message, timestamp):
