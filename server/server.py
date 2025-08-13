@@ -88,8 +88,8 @@ class DeviceService(device_pb2_grpc.DeviceServiceServicer):
     def __init__(self, alert_manager: AlertManager):
         self.alert_manager = alert_manager
         self.device_strategies = {
-            device_pb2.THERMOMETER: ThermometerStrategy(100),
-            device_pb2.SMART_PLUG: SmartPlugStrategy(450),
+            device_pb2.THERMOMETER: ThermometerStrategy(65),
+            device_pb2.SMART_PLUG: SmartPlugStrategy(200),
             device_pb2.MOTION_SENSOR: MotionSensorStrategy(True)
         }
 
@@ -98,7 +98,7 @@ class DeviceService(device_pb2_grpc.DeviceServiceServicer):
             if device_id in subscribed_devices:
                 context = self.alert_manager.clients.get(client_id)
                 if context is not None:
-                    alert_response = alert_pb2.AlertResponse(alert = alert_pb2.Alert(device_id = device_id, message = message, timestamp = timestamp))
+                    alert_response = alert_pb2.AlertResponse(alert = alert_pb2.AlertNotification(device_id = device_id, message = message, timestamp = timestamp))
                     await context.write(alert_response)
         
     async def StreamDeviceData(self, request_iterator, context):
@@ -107,12 +107,19 @@ class DeviceService(device_pb2_grpc.DeviceServiceServicer):
             payload_type = data.WhichOneof("payload")
             payload_value = getattr(data, payload_type)
 
-            print(f"received device_id={data.device_id}, type={data.device_type}, timestamp={data.timestamp}, payload_type={payload_type}, payload_value={payload_value}")
-
+            if payload_type == "temperature":
+                value = payload_value.temperature
+            elif payload_type == "wattage":
+                value = payload_value.wattage
+            elif payload_type == "motion":
+                value = payload_value.motion
+            else:
+                continue
+            print(data.device_id, data.device_type, data.timestamp, value)
             strategy = self.device_strategies.get(data.device_type)
-            if strategy and strategy.should_send(payload_value):
-                await self.send_alert_to_subscribers(data.device_id, f"Alert! Value = {payload_value}", data.timestamp)
-
+            if strategy and strategy.should_send(value):
+                await self.send_alert_to_subscribers(data.device_id, f"Alert! Value = {value}", data.timestamp)
+            
 
         return device_pb2.Response(status = "Success")
     
