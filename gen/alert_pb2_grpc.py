@@ -5,23 +5,26 @@ import warnings
 
 from . import alert_pb2 as alert__pb2
 
-GRPC_GENERATED_VERSION = '1.74.0'
+GRPC_GENERATED_VERSION = "1.74.0"
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
 try:
     from grpc._utilities import first_version_is_lower
-    _version_not_supported = first_version_is_lower(GRPC_VERSION, GRPC_GENERATED_VERSION)
+
+    _version_not_supported = first_version_is_lower(
+        GRPC_VERSION, GRPC_GENERATED_VERSION
+    )
 except ImportError:
     _version_not_supported = True
 
 if _version_not_supported:
     raise RuntimeError(
-        f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in alert_pb2_grpc.py depends on'
-        + f' grpcio>={GRPC_GENERATED_VERSION}.'
-        + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
-        + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
+        f"The grpc package installed is at version {GRPC_VERSION},"
+        + f" but the generated code in alert_pb2_grpc.py depends on"
+        + f" grpcio>={GRPC_GENERATED_VERSION}."
+        + f" Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}"
+        + f" or downgrade your generated code using grpcio-tools<={GRPC_VERSION}."
     )
 
 
@@ -35,10 +38,11 @@ class AlertServiceStub(object):
             channel: A grpc.Channel.
         """
         self.StreamAlerts = channel.stream_stream(
-                '/AlertService/StreamAlerts',
-                request_serializer=alert__pb2.AlertRequest.SerializeToString,
-                response_deserializer=alert__pb2.AlertResponse.FromString,
-                _registered_method=True)
+            "/AlertService/StreamAlerts",
+            request_serializer=alert__pb2.AlertRequest.SerializeToString,
+            response_deserializer=alert__pb2.AlertResponse.FromString,
+            _registered_method=True,
+        )
 
 
 class AlertServiceServicer(object):
@@ -47,43 +51,46 @@ class AlertServiceServicer(object):
     def StreamAlerts(self, request_iterator, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
 
 def add_AlertServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'StreamAlerts': grpc.stream_stream_rpc_method_handler(
-                    servicer.StreamAlerts,
-                    request_deserializer=alert__pb2.AlertRequest.FromString,
-                    response_serializer=alert__pb2.AlertResponse.SerializeToString,
-            ),
+        "StreamAlerts": grpc.stream_stream_rpc_method_handler(
+            servicer.StreamAlerts,
+            request_deserializer=alert__pb2.AlertRequest.FromString,
+            response_serializer=alert__pb2.AlertResponse.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'AlertService', rpc_method_handlers)
+        "AlertService", rpc_method_handlers
+    )
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('AlertService', rpc_method_handlers)
+    server.add_registered_method_handlers("AlertService", rpc_method_handlers)
 
 
- # This class is part of an EXPERIMENTAL API.
+# This class is part of an EXPERIMENTAL API.
 class AlertService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def StreamAlerts(request_iterator,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+    def StreamAlerts(
+        request_iterator,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
         return grpc.experimental.stream_stream(
             request_iterator,
             target,
-            '/AlertService/StreamAlerts',
+            "/AlertService/StreamAlerts",
             alert__pb2.AlertRequest.SerializeToString,
             alert__pb2.AlertResponse.FromString,
             options,
@@ -94,4 +101,5 @@ class AlertService(object):
             wait_for_ready,
             timeout,
             metadata,
-            _registered_method=True)
+            _registered_method=True,
+        )

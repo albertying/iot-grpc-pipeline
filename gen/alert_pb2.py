@@ -9,40 +9,36 @@ from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
-    _runtime_version.Domain.PUBLIC,
-    6,
-    31,
-    1,
-    '',
-    'alert.proto'
+    _runtime_version.Domain.PUBLIC, 6, 31, 1, "", "alert.proto"
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x61lert.proto\"r\n\x0c\x41lertRequest\x12&\n\tsubscribe\x18\x01 \x01(\x0b\x32\x11.SubscribeRequestH\x00\x12*\n\x0bunsubscribe\x18\x02 \x01(\x0b\x32\x13.UnsubscribeRequestH\x00\x42\x0e\n\x0crequest_type\"8\n\x10SubscribeRequest\x12\x11\n\tclient_id\x18\x01 \x01(\t\x12\x11\n\tdevice_id\x18\x02 \x01(\t\":\n\x12UnsubscribeRequest\x12\x11\n\tclient_id\x18\x01 \x01(\t\x12\x11\n\tdevice_id\x18\x02 \x01(\t\"b\n\rAlertResponse\x12\x1b\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\x0c.AckResponseH\x00\x12#\n\x05\x61lert\x18\x02 \x01(\x0b\x32\x12.AlertNotificationH\x00\x42\x0f\n\rresponse_type\"/\n\x0b\x41\x63kResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x0f\n\x07success\x18\x02 \x01(\x08\"J\n\x11\x41lertNotification\x12\x11\n\tdevice_id\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\t2A\n\x0c\x41lertService\x12\x31\n\x0cStreamAlerts\x12\r.AlertRequest\x1a\x0e.AlertResponse(\x01\x30\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b'\n\x0b\x61lert.proto"r\n\x0c\x41lertRequest\x12&\n\tsubscribe\x18\x01 \x01(\x0b\x32\x11.SubscribeRequestH\x00\x12*\n\x0bunsubscribe\x18\x02 \x01(\x0b\x32\x13.UnsubscribeRequestH\x00\x42\x0e\n\x0crequest_type"8\n\x10SubscribeRequest\x12\x11\n\tclient_id\x18\x01 \x01(\t\x12\x11\n\tdevice_id\x18\x02 \x01(\t":\n\x12UnsubscribeRequest\x12\x11\n\tclient_id\x18\x01 \x01(\t\x12\x11\n\tdevice_id\x18\x02 \x01(\t"b\n\rAlertResponse\x12\x1b\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\x0c.AckResponseH\x00\x12#\n\x05\x61lert\x18\x02 \x01(\x0b\x32\x12.AlertNotificationH\x00\x42\x0f\n\rresponse_type"/\n\x0b\x41\x63kResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x0f\n\x07success\x18\x02 \x01(\x08"J\n\x11\x41lertNotification\x12\x11\n\tdevice_id\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\t2A\n\x0c\x41lertService\x12\x31\n\x0cStreamAlerts\x12\r.AlertRequest\x1a\x0e.AlertResponse(\x01\x30\x01\x62\x06proto3'
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'alert_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "alert_pb2", _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-  DESCRIPTOR._loaded_options = None
-  _globals['_ALERTREQUEST']._serialized_start=15
-  _globals['_ALERTREQUEST']._serialized_end=129
-  _globals['_SUBSCRIBEREQUEST']._serialized_start=131
-  _globals['_SUBSCRIBEREQUEST']._serialized_end=187
-  _globals['_UNSUBSCRIBEREQUEST']._serialized_start=189
-  _globals['_UNSUBSCRIBEREQUEST']._serialized_end=247
-  _globals['_ALERTRESPONSE']._serialized_start=249
-  _globals['_ALERTRESPONSE']._serialized_end=347
-  _globals['_ACKRESPONSE']._serialized_start=349
-  _globals['_ACKRESPONSE']._serialized_end=396
-  _globals['_ALERTNOTIFICATION']._serialized_start=398
-  _globals['_ALERTNOTIFICATION']._serialized_end=472
-  _globals['_ALERTSERVICE']._serialized_start=474
-  _globals['_ALERTSERVICE']._serialized_end=539
+    DESCRIPTOR._loaded_options = None
+    _globals["_ALERTREQUEST"]._serialized_start = 15
+    _globals["_ALERTREQUEST"]._serialized_end = 129
+    _globals["_SUBSCRIBEREQUEST"]._serialized_start = 131
+    _globals["_SUBSCRIBEREQUEST"]._serialized_end = 187
+    _globals["_UNSUBSCRIBEREQUEST"]._serialized_start = 189
+    _globals["_UNSUBSCRIBEREQUEST"]._serialized_end = 247
+    _globals["_ALERTRESPONSE"]._serialized_start = 249
+    _globals["_ALERTRESPONSE"]._serialized_end = 347
+    _globals["_ACKRESPONSE"]._serialized_start = 349
+    _globals["_ACKRESPONSE"]._serialized_end = 396
+    _globals["_ALERTNOTIFICATION"]._serialized_start = 398
+    _globals["_ALERTNOTIFICATION"]._serialized_end = 472
+    _globals["_ALERTSERVICE"]._serialized_start = 474
+    _globals["_ALERTSERVICE"]._serialized_end = 539
 # @@protoc_insertion_point(module_scope)
